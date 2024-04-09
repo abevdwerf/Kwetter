@@ -4,6 +4,13 @@ public class UserMessage {
     private Integer id;
     private String displayName;
     private String userName;
+
+    public UserMessage(Integer id, String displayName, String userName) {
+        this.id = id;
+        this.displayName = displayName;
+        this.userName = userName;
+    }
+
     public Integer getId() {
         return id;
     }

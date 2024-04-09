@@ -5,6 +5,12 @@ public class UserMessage {
     private String displayName;
     private String userName;
 
+    public UserMessage(String id, String displayName, String userName) {
+        this.id = id;
+        this.displayName = displayName;
+        this.userName = userName;
+    }
+
     public String getId() {
         return id;
     }

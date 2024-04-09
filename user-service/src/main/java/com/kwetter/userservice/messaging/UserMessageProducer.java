@@ -15,10 +15,7 @@ public class UserMessageProducer {
     }
 
     public void sendMessage(User user) {
-        UserMessage userMessage = new UserMessage();
-        userMessage.setId(user.getId());
-        userMessage.setUserName(user.getUserName());
-        userMessage.setDisplayName(user.getDisplayName());
+        UserMessage userMessage = new UserMessage(user.getId(), user.getUserName(), user.getDescription());
         rabbitTemplate.convertAndSend("displayNameUpdatedQueue", userMessage);
     }
 }
