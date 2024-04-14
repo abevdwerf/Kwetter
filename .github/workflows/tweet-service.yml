@@ -31,11 +31,15 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file tweet-service/pom.xml
 
+  docker:
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
     - name: Build and Push Docker Image
       env:
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       run: |
-        docker build -t <DOCKERHUB_USERNAME>/<IMAGE_NAME>:<TAG> .
+        docker build -t $DOCKERHUB_USERNAME/kwetter/tweet:latest .
         docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-        docker push <DOCKERHUB_USERNAME>/<IMAGE_NAME>:<TAG>
+        docker push $DOCKERHUB_USERNAME/kwetter/tweet:latest
