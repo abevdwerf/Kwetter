@@ -49,7 +49,7 @@ jobs:
         context: "tweet-service"
         file: ./tweet-service/Dockerfile
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/tweet-service:${{ github.sha }}
+        tags: ${{ secrets.DOCKER_USERNAME }}/tweet-service:${{ github.sha }}
     # - name: build
     #   run: |
     #     docker build -f tweet-service/Dockerfile -t abevdwerf/kwetter-tweet-service:latest tweet-service
