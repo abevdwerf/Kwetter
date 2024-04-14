@@ -38,7 +38,7 @@ jobs:
       uses: actions/checkout@v3
     - name: build
       run: |
-        docker build . --file Dockerfile -t abevdwerf/kwetter-tweet-service:latest
+        docker build . -f tweet-service/Dockerfile -t abevdwerf/kwetter-tweet-service:latest
     - name: publish
       run: |
         docker login -u abevdwerf -p ${{ secrets.DOCKER_PASSWORD }}
