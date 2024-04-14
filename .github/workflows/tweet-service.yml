@@ -34,11 +34,12 @@ jobs:
     runs-on: ubuntu-latest
     needs: [build]
     steps:
-    - name: Build and Push Docker Image
-      env:
-          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+    - name: checkout
+      uses: acions/checkout@v3
+    - name: build
       run: |
-        docker build -t $DOCKERHUB_USERNAME/kwetter-tweetService:latest .
-        docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-        docker push $DOCKERHUB_USERNAME/kwetter-tweetService:latest
+        docker build . -t abevdwerf/kwetter-tweet-service:latest
+    - name: publish
+      run: |
+        docker login -u abevdwerf -p ${{ secrets.DOCKER_PASSWORD }}
+        docker push abevdwerf/kwetter-tweetService:latest
