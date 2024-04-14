@@ -36,10 +36,24 @@ jobs:
     steps:
     - name: checkout
       uses: actions/checkout@v3
-    - name: build
-      run: |
-        docker build -f tweet-service/Dockerfile -t abevdwerf/kwetter-tweet-service:latest tweet-service
-    - name: publish
-      run: |
-        docker login -u abevdwerf -p ${{ secrets.DOCKER_PASSWORD }}
-        docker push abevdwerf/kwetter-tweetService:latest
+    - name: Login to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+    - name: Build and push
+      uses: docker/build-push-action@v5
+      with:
+        context: "tweet-service"
+        file: ./tweet-service/Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/kwetter-tweet-service:latest
+    # - name: build
+    #   run: |
+    #     docker build -f tweet-service/Dockerfile -t abevdwerf/kwetter-tweet-service:latest tweet-service
+    # - name: publish
+    #   run: |
+    #     docker login -u abevdwerf -p ${{ secrets.DOCKER_PASSWORD }}
+    #     docker push abevdwerf/kwetter-tweetService:latest
