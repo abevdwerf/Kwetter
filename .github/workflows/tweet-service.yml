@@ -47,7 +47,6 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         context: "tweet-service"
-        file: ./tweet-service/Dockerfile
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/tweet-service:${{ github.sha }}
     # - name: build
