@@ -11,8 +11,8 @@ name: Java CI with Maven
 on:
   push:
     branches: [ "master" ]
-    # paths:
-    #  - 'tweet-service/**'
+    paths:
+     - 'tweet-service/**'
   pull_request:
     branches: [ "master" ]
 
@@ -30,11 +30,6 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file tweet-service/pom.xml
 
-  # docker:
-  #   runs-on: ubuntu-latest
-  #   needs: [build]
-  #   steps:
-  #   - uses: actions/checkout@v4
     - name: Login to Docker Hub
       uses: docker/login-action@v3
       with:
@@ -48,10 +43,3 @@ jobs:
         context: "tweet-service"
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/tweet-service:${{ github.sha }}
-    # - name: build
-    #   run: |
-    #     docker build -f tweet-service/Dockerfile -t abevdwerf/kwetter-tweet-service:latest tweet-service
-    # - name: publish
-    #   run: |
-    #     docker login -u abevdwerf -p ${{ secrets.DOCKER_PASSWORD }}
-    #     docker push abevdwerf/kwetter-tweetService:latest
