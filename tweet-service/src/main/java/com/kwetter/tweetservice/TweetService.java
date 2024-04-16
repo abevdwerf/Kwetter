@@ -33,7 +33,7 @@ public class TweetService {
     }
 
     public void updateDisplayName(UserMessage userMessage) {
-        List<Tweet> tweetsToUpdate = tweetRepository.findByUserId(userMessage.getId());
+        List<Tweet> tweetsToUpdate = getTweetsByUserId(userMessage.getId());
         for (Tweet tweet : tweetsToUpdate) {
             tweet.setDisplayName(userMessage.getDisplayName());
             tweetRepository.save(tweet);
