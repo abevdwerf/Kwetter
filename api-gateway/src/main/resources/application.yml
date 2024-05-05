@@ -25,9 +25,9 @@ spring:
             allowedHeaders: '*'
 #        add-to-simple-url-handler-mapping:
 #          true
-#  security:
-#    oauth2:
-#      resourceserver:
-#        jwt:
-#          issuer-uri: https://securetoken.google.com/kwetter-fcdd6
-#          jwk-set-uri: https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://securetoken.google.com/kwetter-fcdd6
+          jwk-set-uri: https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com
