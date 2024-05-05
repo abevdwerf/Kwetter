@@ -27,4 +27,6 @@ public class User {
     private String displayName;
     private String userName;
     private String description;
+    @Column(unique = true)
+    private String firebaseUuid;
 }
