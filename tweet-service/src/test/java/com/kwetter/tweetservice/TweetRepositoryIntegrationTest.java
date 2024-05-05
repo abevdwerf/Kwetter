@@ -4,7 +4,6 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.mongo.DataMongoTest;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.testcontainers.containers.MongoDBContainer;
 import org.testcontainers.junit.jupiter.Container;
@@ -16,11 +15,11 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @DataMongoTest
 @Testcontainers
-public class TweetRepositoryTests {
+class TweetRepositoryIntegrationTest {
 
     @Container
     @ServiceConnection
-    public static MongoDBContainer mongoDBContainer = new MongoDBContainer("mongo:latest");
+    static MongoDBContainer mongoDBContainer = new MongoDBContainer("mongo:latest");
 
     @Autowired
     private TweetRepository tweetRepository;
@@ -32,7 +31,7 @@ public class TweetRepositoryTests {
     }
 
     @Test
-    public void testFindByUserIdNotNull() {
+    void testFindByUserIdNotNull() {
         Tweet tweet = Tweet.builder().
                 userId("123").
                 displayName("John Doe").
@@ -44,6 +43,5 @@ public class TweetRepositoryTests {
         List<Tweet> tweetList = tweetRepository.findByUserId(tweet.getUserId());
 
         Assertions.assertThat(tweetList).isNotNull();
-
     }
 }
