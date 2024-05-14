@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tweet
+  labels:
+    app: tweet
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: tweet
+      labels:
+        app: tweet
+    spec:
+      containers:
+        - name: tweet
+          image: abevdw/tweet-service:latest
+          ports:
+            - containerPort: 8081
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: k8s
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: tweet
