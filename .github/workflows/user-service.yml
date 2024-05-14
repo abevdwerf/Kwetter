@@ -51,4 +51,4 @@ jobs:
       with:
         context: "user-service"
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/user-service:${{ github.sha }}
+        tags: ${{ secrets.DOCKER_USERNAME }}/user-service:latest
