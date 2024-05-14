@@ -51,4 +51,4 @@ jobs:
       with:
         context: "tweet-service"
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/tweet-service:${{ github.sha }}
+        tags: ${{ secrets.DOCKER_USERNAME }}/tweet-service:latest
