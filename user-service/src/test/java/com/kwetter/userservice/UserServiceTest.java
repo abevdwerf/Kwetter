@@ -29,7 +29,7 @@ public class UserServiceTest {
 
     @Test
     public void testRegisterUser() {
-        UserRegistrationRequest request = new UserRegistrationRequest("username", "displayname", "description");
+        UserRegistrationRequest request = new UserRegistrationRequest("username", "displayname", "description", "someuuid");
 
         userService.registerUser(request);
 
@@ -40,7 +40,7 @@ public class UserServiceTest {
     @Test
     public void testUpdateUser() {
         // Mock existing user
-        User existingUser = new User(1, "existing_displayname", "existing_username", "existing_description");
+        User existingUser = new User(1, "existing_displayname", "existing_username", "existing_description", "someuuid");
         when(userRepository.findById(1)).thenReturn(java.util.Optional.of(existingUser));
 
         UserUpdateRequest request = new UserUpdateRequest(1, "existing_displayname", "existing_username", "new_description");
