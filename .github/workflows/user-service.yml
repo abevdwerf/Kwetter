@@ -3,8 +3,8 @@ name: user service
 on:
   push:
     branches: [ "master" ]
-    paths:
-     - 'user-service/**'
+    # paths:
+    #  - 'user-service/**'
   pull_request:
     branches: [ "master" ]
 
