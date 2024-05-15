@@ -8,3 +8,4 @@ spring:
       uri: mongodb://mongo:27017/tweet
   rabbitmq:
     addresses: rabbitmq:5672
+debug: true
