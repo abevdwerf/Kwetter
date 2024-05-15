@@ -5,8 +5,6 @@ spring:
     name: tweet-service
   data:
     mongodb:
-      host:
-      database: tweet
-      port: 27017
+      uri: mongodb://mongo:27017/tweet
   rabbitmq:
     addresses: rabbitmq:5672
