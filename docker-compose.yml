@@ -38,9 +38,11 @@ services:
       - spring
   mongodb:
     image: mongo:latest
-    container_name: "mongodb"
+    container_name: "mongo"
     ports:
       - "27017:27017"
+    networks:
+      - mongodb
   user:
     image: abevdw/user-service:latest
     container_name: user-service
@@ -55,20 +57,20 @@ services:
       - postgres
       - rabbitmq
   tweet:
-      image: abevdw/tweet-service:latest
-      container_name: tweet-service
-      ports:
-        - "8081:8081"
-      environment:
-        - SPRING_PROFILES_ACTIVE=docker
-      networks:
-        - spring
-        - mongodb
-      depends_on:
-        - mongodb
-        - rabbitmq
+    image: abevdw/tweet-service:latest
+    container_name: tweet-service
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    networks:
+      - spring
+      - mongodb
+    depends_on:
+      - mongodb
+      - rabbitmq
   api-gateway:
-    image: abevdw/api-gateway:0b17384277d777ec0c3c69a177e136b26615358c
+    image: abevdw/api-gateway:latest
     container_name: api-gateway
     ports:
       - "8080:8080"
