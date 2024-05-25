@@ -2,6 +2,7 @@ package com.kwetter.tweetservice;
 
 import com.kwetter.tweetservice.dto.UserMessage;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -12,6 +13,7 @@ import java.util.Collections;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
+@Tag("unitTest")
 public class TweetServiceTest {
     @Mock
     private TweetRepository tweetRepository;

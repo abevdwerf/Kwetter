@@ -1,6 +1,7 @@
 package com.kwetter.tweetservice;
 
 import com.kwetter.tweetservice.dto.UserMessage;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -26,9 +27,8 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.awaitility.Awaitility.await;
 
-@ActiveProfiles("it")
+@Tag("integrationTest")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-
 @Testcontainers
 class UserDisplayNameUpdatedIntegrationTest {
 

@@ -17,6 +17,8 @@
 		<java.version>21</java.version>
 		<sonar.organization>abevdwerf</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+		<skip.unit.tests>true</skip.unit.tests>
+		<skip.integration.tests>true</skip.integration.tests>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -72,6 +74,23 @@
 		</dependency>
 	</dependencies>
 
+	<profiles>
+		<profile>
+			<id>unit-tests</id>
+			<properties>
+				<skip.unit.tests>false</skip.unit.tests>
+				<skip.integration.tests>true</skip.integration.tests>
+			</properties>
+		</profile>
+		<profile>
+			<id>integration-tests</id>
+			<properties>
+				<skip.integration.tests>false</skip.integration.tests>
+				<skip.unit.tests>true</skip.unit.tests>
+			</properties>
+		</profile>
+	</profiles>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -106,6 +125,36 @@
 							<formats>
 								<format>XML</format>
 							</formats>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<groups>unitTest</groups>
+					<skipTests>${skip.unit.tests}</skipTests>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<configuration>
+					<includes>
+						<include>**/*.java</include>
+					</includes>
+					<groups>integrationTest</groups>
+				</configuration>
+				<executions>
+					<execution>
+						<id>integration-tests</id>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+						<configuration>
+							<skipTests>${skip.integration.tests}</skipTests>
 						</configuration>
 					</execution>
 				</executions>
