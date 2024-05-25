@@ -94,8 +94,8 @@ jobs:
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: mvn -B verify -DskipTests org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=abevdwerf_Kwetter package --file tweet-service/pom.xml -Pcoverage
-
+      run: mvn -B verify -DskipTests org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Pcoverage -Dsonar.projectKey=abevdwerf_Kwetter package --file tweet-service/pom.xml
+  
   # docker_build_and_push:
   #   runs-on: ubuntu-latest
   #   needs: [sonarcloud]
