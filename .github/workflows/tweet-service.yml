@@ -117,5 +117,5 @@ jobs:
   #     uses: docker/build-push-action@v5
   #     with:
   #       context: "tweet-service"
-        push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/tweet-service:latest
+        # push: true
+        # tags: ${{ secrets.DOCKER_USERNAME }}/tweet-service:latest
