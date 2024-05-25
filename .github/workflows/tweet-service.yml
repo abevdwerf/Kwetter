@@ -32,7 +32,7 @@ jobs:
     - uses: actions/upload-artifact@v4
       with:
         name: tweet-service-artifact
-        path: tweet-service/target/*.jar
+        path: tweet-service/target/tweet-service-0.0.1-SNAPSHOT.jar
       
   unit_tests:
     runs-on: ubuntu-latest
