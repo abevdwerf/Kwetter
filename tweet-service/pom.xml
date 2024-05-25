@@ -77,6 +77,9 @@
 	<profiles>
 		<profile>
 			<id>unit-tests</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
 			<properties>
 				<skip.unit.tests>false</skip.unit.tests>
 				<skip.integration.tests>true</skip.integration.tests>
