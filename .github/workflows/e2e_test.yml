@@ -20,11 +20,12 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
-          command: npm run config
-          build: npm run build
+          build: npm run config | npm run build
           start: npm start
           working-directory: Kwetter-frontend
           spec: cypress/e2e/post_tweet.cy.ts
+        env:
+          FIREBASE_DETAILS: '${{ secrets.FIREBASE_DETAILS }}'
           
       - name: Stop Docker Compose
         run: docker-compose down
