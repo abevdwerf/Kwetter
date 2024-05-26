@@ -67,7 +67,7 @@ jobs:
           path: Kwetter-frontend
 
       - name: Start Docker Compose
-        run: docker-compose up -d
+        run: docker-compose up -d --build
       # - name: docker inspect
       #   run: docker inspect api-gateway
       # - name: docker ps list
