@@ -6,8 +6,8 @@ jobs:
   e2e-tests:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
+      # - name: Checkout Repository
+      #   uses: actions/checkout@v4
       - name: Checkout Frontend Repository
         uses: actions/checkout@v4
         with:
@@ -21,10 +21,6 @@ jobs:
         with:
           build: npm run build
           start: npm start
-
-      # - name: Run end-to-end tests
-      #   working-directory: ./frontend
-      #   run: npm run e2e
-
+          
       - name: Stop Docker Compose
         run: docker-compose down
