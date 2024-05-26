@@ -20,9 +20,11 @@ jobs:
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
+          command: npm run config
           build: npm run build
           start: npm start
           working-directory: Kwetter-frontend
+          spec: cypress/e2e/post_tweet.cy.ts
           
       - name: Stop Docker Compose
         run: docker-compose down
