@@ -5,6 +5,64 @@ on: workflow_dispatch
 jobs:
   e2e-tests:
     runs-on: ubuntu-latest
+        services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: password
+          PGDATA: /data/postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --mount type=volume,source=postgres,target=/data/postgres
+
+      pgadmin:
+        image: dpage/pgadmin4
+        env:
+          PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
+          PGADMIN_DEFAULT_PASSWORD: admin
+          PGADMIN_CONFIG_SERVER_MODE: 'False'
+        ports:
+          - 5050:80
+
+      rabbitmq:
+        image: rabbitmq:management
+        ports:
+          - 5672:5672
+          - 15672:15672
+
+      mongodb:
+        image: mongo:latest
+        ports:
+          - 27017:27017
+
+      user-service:
+        image: abevdw/user-service:latest
+        ports:
+          - 8082:8082
+        env:
+          SPRING_PROFILES_ACTIVE: docker
+        depends-on:
+          - postgres
+          - rabbitmq
+
+      tweet-service:
+        image: abevdw/tweet-service:latest
+        ports:
+          - 8081:8081
+        env:
+          SPRING_PROFILES_ACTIVE: docker
+        depends-on:
+          - mongodb
+          - rabbitmq
+
+      api-gateway:
+        image: abevdw/api-gateway:latest
+        ports:
+          - 8080:8080
+        env:
+          SPRING_PROFILES_ACTIVE: docker
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -20,10 +78,10 @@ jobs:
       #   run: docker inspect api-gateway
       # - name: docker ps list
       #   run: docker ps
-      - name: docker compose up
-        uses: hoverkraft-tech/compose-action@v1.5.1
-        with:
-          compose-file: "docker-compose.yml"
+      # - name: docker compose up
+      #   uses: hoverkraft-tech/compose-action@v1.5.1
+      #   with:
+      #     compose-file: "docker-compose.yml"
       
 
       - name: Cypress run
