@@ -25,8 +25,11 @@ jobs:
           wait-on: 'http://[::1]:4200'
           working-directory: Kwetter-frontend
           spec: cypress/e2e/post_tweet.cy.ts
+          record: true
         env:
           FIREBASE_DETAILS: ${{ secrets.FIRE_BASE_DETAILS }}
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Stop Docker Compose
         run: docker-compose down
