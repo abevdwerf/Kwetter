@@ -12,6 +12,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: abevdwerf/Kwetter-frontend
+          path: Kwetter-frontend
 
       - name: Start Docker Compose
         run: docker-compose up -d
