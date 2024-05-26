@@ -14,12 +14,17 @@ jobs:
           repository: abevdwerf/Kwetter-frontend
           path: Kwetter-frontend
 
-      - name: Start Docker Compose
-        run: docker-compose up -d
-      - name: docker inspect
-        run: docker inspect api-gateway
-      - name: docker ps list
-        run: docker ps
+      # - name: Start Docker Compose
+      #   run: docker-compose up -d
+      # - name: docker inspect
+      #   run: docker inspect api-gateway
+      # - name: docker ps list
+      #   run: docker ps
+      - name: docker compose up
+        uses: hoverkraft-tech/compose-action@v1.5.1
+        with:
+          compose-file: "docker-compose.yml"
+      
 
       - name: Cypress run
         uses: cypress-io/github-action@v6
@@ -35,5 +40,5 @@ jobs:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
-      - name: Stop Docker Compose
-        run: docker-compose down
+      # - name: Stop Docker Compose
+      #   run: docker-compose down
