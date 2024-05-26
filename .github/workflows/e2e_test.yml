@@ -72,6 +72,8 @@ jobs:
       #   run: docker inspect api-gateway
       # - name: docker ps list
       #   run: docker ps
+      - name: docker ps
+        run: docker ps
       - name: show log from api-gateway
         run: docker logs api-gateway
       # - name: docker compose up
