@@ -43,9 +43,6 @@ jobs:
           - 8082:8082
         env:
           SPRING_PROFILES_ACTIVE: docker
-        depends-on:
-          - postgres
-          - rabbitmq
 
       tweet-service:
         image: abevdw/tweet-service:latest
@@ -53,9 +50,6 @@ jobs:
           - 8081:8081
         env:
           SPRING_PROFILES_ACTIVE: docker
-        depends-on:
-          - mongodb
-          - rabbitmq
 
       api-gateway:
         image: abevdw/api-gateway:latest
