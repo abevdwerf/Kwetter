@@ -75,7 +75,7 @@ jobs:
       - name: docker ps
         run: docker ps
       - name: show log from api-gateway
-        run: docker logs api-gateway
+        run: docker logs api-gateway --entrypoint /bin/bash abevdw/api-gateway:latest
       # - name: docker compose up
       #   uses: hoverkraft-tech/compose-action@v1.5.1
       #   with:
