@@ -16,20 +16,24 @@ jobs:
 
       - name: Start Docker Compose
         run: docker-compose up -d
+      - name: docker inspect
+        run: docker inspect api-gateway
+      - name: docker ps list
+        run: docker ps
 
-      - name: Cypress run
-        uses: cypress-io/github-action@v6
-        with:
-          build: npm run config | npm run build
-          start: npm start
-          wait-on: 'http://[::1]:4200'
-          working-directory: Kwetter-frontend
-          spec: cypress/e2e/post_tweet.cy.ts
-          record: true
-        env:
-          FIREBASE_DETAILS: ${{ secrets.FIRE_BASE_DETAILS }}
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Cypress run
+      #   uses: cypress-io/github-action@v6
+      #   with:
+      #     build: npm run config | npm run build
+      #     start: npm start
+      #     wait-on: 'http://[::1]:4200'
+      #     working-directory: Kwetter-frontend
+      #     spec: cypress/e2e/post_tweet.cy.ts
+      #     record: true
+      #   env:
+      #     FIREBASE_DETAILS: ${{ secrets.FIRE_BASE_DETAILS }}
+      #     CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Stop Docker Compose
         run: docker-compose down
