@@ -26,7 +26,7 @@ jobs:
           working-directory: Kwetter-frontend
           spec: cypress/e2e/post_tweet.cy.ts
         env:
-          FIREBASE_DETAILS: '${{ secrets.FIREBASE_DETAILS }}'
+          FIREBASE_DETAILS: ${{ secrets.FIREBASE_DETAILS }}
           
       - name: Stop Docker Compose
         run: docker-compose down
