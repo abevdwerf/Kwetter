@@ -22,6 +22,7 @@ jobs:
         with:
           build: npm run config | npm run build
           start: npm start
+          wait-on: 'http://[::1]:4200'
           working-directory: Kwetter-frontend
           spec: cypress/e2e/post_tweet.cy.ts
         env:
