@@ -1,0 +1,47 @@
+name: CI Workflow
+
+on: workflow_dispatch
+
+jobs:
+  e2e-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      # - name: Build the stack
+      #   run: docker-compose up -d
+      # - name: Checkout Frontend Repository
+      #   uses: actions/checkout@v2
+      #   with:
+      #     repository: abevdwerf/Kwetter-frontend
+
+      # - name: Set up Node.js
+      #   uses: actions/setup-node@v3
+      #   with:
+      #     node-version: '14'
+
+      # - name: Install Angular CLI
+      #   run: npm install -g @angular/cli
+
+      # - name: Install frontend dependencies
+      #   working-directory: ./frontend
+      #   run: npm install
+
+      # - name: Start Angular project
+      #   working-directory: ./frontend
+      #   run: ng serve --host 0.0.0.0 --disable-host-check &
+      #   env:
+      #     CI: true
+
+      # - name: Wait for Angular to start
+      #   run: sleep 60
+
+      - name: Start Docker Compose
+        run: docker-compose up -d
+
+      # - name: Run end-to-end tests
+      #   working-directory: ./frontend
+      #   run: ng e2e
+
+      - name: Stop Docker Compose
+        run: docker-compose down
