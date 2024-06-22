@@ -1,9 +1,9 @@
-name: deployment-azure-kubernetes-service
-"on":
+# name: deployment-azure-kubernetes-service
+# "on":
     # push:
     #     branches:
     #         - master
-    workflow_dispatch: {}
+    # workflow_dispatch: {}
 env:
     ACR_RESOURCE_GROUP: kwetter
     AZURE_CONTAINER_REGISTRY: acrworkflow1719055015818
@@ -14,21 +14,21 @@ env:
         ./K8S/bootstrap/tweet/tweet-deployment.yaml
         ./K8S/bootstrap/tweet/tweet-service.yaml
 jobs:
-    buildImage:
-        permissions:
-            contents: read
-            id-token: write
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v3
-            - uses: azure/login@92a5484dfaf04ca78a94597f4f19fea633851fa2
-              name: Azure login
-              with:
-                client-id: ${{ secrets.AZURE_CLIENT_ID }}
-                subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-                tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-            - name: Build and push image to ACR
-              run: az acr build --image ${{ env.CONTAINER_NAME }}:${{ github.sha }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.ACR_RESOURCE_GROUP }} -f ./tweet-service/Dockerfile ./
+#     buildImage:
+#         permissions:
+#             contents: read
+#             id-token: write
+#         runs-on: ubuntu-latest
+#         steps:
+#             - uses: actions/checkout@v3
+#             - uses: azure/login@92a5484dfaf04ca78a94597f4f19fea633851fa2
+#               name: Azure login
+#               with:
+#                 client-id: ${{ secrets.AZURE_CLIENT_ID }}
+#                 subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+#                 tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+#             - name: Build and push image to ACR
+#               run: az acr build --image ${{ env.CONTAINER_NAME }}:${{ github.sha }} --registry ${{ env.AZURE_CONTAINER_REGISTRY }} -g ${{ env.ACR_RESOURCE_GROUP }} -f ./tweet-service/Dockerfile ./
     deploy:
         permissions:
             actions: read
@@ -60,6 +60,6 @@ jobs:
               name: Deploys application
               with:
                 action: deploy
-                images: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }}
+                # images: ${{ env.AZURE_CONTAINER_REGISTRY }}.azurecr.io/${{ env.CONTAINER_NAME }}:${{ github.sha }}
                 manifests: ${{ env.DEPLOYMENT_MANIFEST_PATH }}
                 namespace: default
