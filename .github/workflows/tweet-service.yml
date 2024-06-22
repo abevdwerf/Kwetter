@@ -3,8 +3,8 @@ name: tweet service
 on:
   push:
     branches: [ "master" ]
-    # paths:
-    #  - 'tweet-service/**'
+    paths:
+     - 'tweet-service/**'
   pull_request:
     branches: [ "master" ]
 
