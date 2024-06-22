@@ -1,8 +1,8 @@
 name: deployment-azure-kubernetes-service
 "on":
-    push:
-        branches:
-            - master
+    # push:
+    #     branches:
+    #         - master
     workflow_dispatch: {}
 env:
     ACR_RESOURCE_GROUP: kwetter
