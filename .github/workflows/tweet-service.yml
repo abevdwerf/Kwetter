@@ -8,7 +8,15 @@ on:
   pull_request:
     branches: [ "master" ]
 
-
+env:
+    ACR_RESOURCE_GROUP: kwetter
+    AZURE_CONTAINER_REGISTRY: acrworkflow1719055015818
+    CLUSTER_NAME: kwetter-cluster
+    CLUSTER_RESOURCE_GROUP: kwetter
+    CONTAINER_NAME: image-workflow-1719055015818
+    DEPLOYMENT_MANIFEST_PATH: |
+        ./K8S/bootstrap/tweet/tweet-deployment.yaml
+        ./K8S/bootstrap/tweet/tweet-service.yaml
 jobs:
   build:
     runs-on: ubuntu-latest
